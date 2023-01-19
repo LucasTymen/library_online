@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  scope "(:locale)", locale: /en|fr/ do
+    resources :books
+    root 'books#index'
+  end
+
+
+  get 'users/:username' => 'users#show' , as: :show_user
   resources :books do
   member do
       get 'buy'
@@ -22,9 +30,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'static_pages#home'
-
-  get 'users/:username' => 'users#show' , as: :show_user
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
